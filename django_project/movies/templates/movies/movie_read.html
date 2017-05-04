@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+  <script src="{% static 'movies/js/movies.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">Movies</h1>
+
+  <p>
+    <button type="button" class="btn btn-primary js-create-movie" data-url="{% url 'movie_create' %}">
+      Add movie
+    </button>
+  </p>
+
+  <table class="table" id="movie-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Release date</th>
+        <th>Director</th>
+        <th>Duration</th>
+        <th>Genre</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'movies/partial_movie_read.html' %}
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="modal-movie">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

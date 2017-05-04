@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <div style="margin: auto;
+    width: 70%;
+    padding: 50px;
+    text-align: center;">
+  <h1 class="page-header">Welcome{% if user.is_authenticated %},
+    {{ user.username }}!
+{% endif %}</h1>
+  <h2 style="line-height: 1.8;">Here you can freely view available list of movies <br>
+    and impove it by your own</h2>
+ </div>
+{% endblock %}

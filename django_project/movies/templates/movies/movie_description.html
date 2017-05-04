@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+  <script src="{% static 'movies/js/movies-upload.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <h1 class="page-header">{{ movie.title }}</h1>
+              <div class="row">
+        <h3>     Description:</h3>
+        <h4>{{movie.description}}</h4><br><br>
+    </div>
+
+  <div class="row">
+
+
+        <button id="file-upload-button" type="button" class="btn btn-primary js-upload-photos pull-left">
+          <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos
+        </button>
+
+        <form method="post" action="{% url 'remove_photo' movie.id %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button type="submit" class="btn btn-danger pull-left">
+      <span class="glyphicon glyphicon-trash"></span> Clear
+    </button>
+  </form>
+
+
+        <input id="fileupload" type="file" name="file" multiple
+               style="display: none;"
+               data-url="{% url 'movie_description' movie.id %}"
+               data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+
+<br><br><br>
+        <table id="gallery" class="table pull-left" style="width:100%; height:100%">
+
+  <tbody>
+  <tr style="
+    border: 1px solid grey;">
+      <td>
+    {% for photo in photos %}
+
+        <img style="display: inline-block;"width="370" height="220" src="{{ photo.file.url }}" class="thumbnail">
+
+
+    {% endfor %}
+      </td>
+  </tr>
+  </tbody>
+</table>
+
+    </div>
+
+</div>
+{% endblock %}-

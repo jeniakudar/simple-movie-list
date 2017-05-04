@@ -1,0 +1,25 @@
+{% for movie in movies %}
+  <tr>
+    <td>
+        <a href="{% url 'movie_description' movie.id %}">{{ movie.title }}</a>
+    </td>
+    <td>{{ movie.release_date }}</td>
+    <td>{{ movie.director }}</td>
+    <td>{{ movie.duration }}</td>
+    <td>{{ movie.genre }}</td>
+    <td style="width: 150px">
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-movie"
+              data-url="{% url 'movie_update' movie.id %}">Edit
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-delete-movie"
+              data-url="{% url 'movie_delete' movie.id %}">Delete
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No movie ...</td>
+  </tr>
+{% endfor %}
