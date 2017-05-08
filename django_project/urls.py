@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^movies/(?P<pk>\d+)/update/$', views.movie_update, name='movie_update'),
     url(r'^movies/(?P<pk>\d+)/delete/$', views.movie_delete, name='movie_delete'),
     url(r'^movies/(?P<pk>\d+)/description/$', views.movie_description, name='movie_description'),
-    url(r'^movies/(?P<pk>\d+)/description/upload/clear/$', views.remove_photo, name='remove_photo'),
+    url(r'^movies/(?P<pk>\d+)/description/upload_clear/$', views.remove_photo, name='remove_photo'),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^admin/', admin.site.urls),

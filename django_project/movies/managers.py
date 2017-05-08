@@ -1,5 +1,3 @@
-import datetime as dt
-
 import django.db.models as models
 from django.db.models import Q
 

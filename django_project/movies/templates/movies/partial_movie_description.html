@@ -1,0 +1,6 @@
+{% for photo in photos %}
+    <img style="display: inline-block;
+            "width="370" height="220" src="{{ photo.file.url }}" class="thumbnail">
+{% empty %}
+    <div class="text-center">No photos ...</div>
+{% endfor %}

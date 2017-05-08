@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from .models import Driver
 
-# Define an inline admin descriptor for Employee model
+# Define an inline admin descriptor for Driver model
 # which acts a bit like a singleton
 class DriverInline(admin.StackedInline):
     model = Driver

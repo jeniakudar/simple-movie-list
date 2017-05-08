@@ -1,9 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
-from django.views import View
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
@@ -26,10 +24,12 @@ def movie_description(request, pk):
         if form.is_valid():
             photo = form.save()
             photo.movie = movie
-            #import pdb
-            #pdb.set_trace()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
             photo.save()
+            data = dict()
+            data['is_valid'] = True
+            data['photos'] = render_to_string('movies/partial_movie_description.html', {
+                'photos': photos_list
+            })
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
@@ -117,7 +117,9 @@ def movie_delete(request, pk):
 
 
 def remove_photo(request, pk):
-    for photo in Photo.objects.all():
+    movie = get_object_or_404(Movie, pk=pk)
+    photos_list = movie.photo_set.all()
+    for photo in photos_list:
         photo.file.delete()
         photo.delete()
     return redirect(request.POST.get('next'))
